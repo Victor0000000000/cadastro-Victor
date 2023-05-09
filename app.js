@@ -8,8 +8,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const connection = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
-  password: "A1b1c1d1",
-  database: "meuBanco"
+  password: "",
+  database: "meubanco2"
 });
 
 app.get("/", (req, res) => {
@@ -21,13 +21,13 @@ app.get("/cadastro", (req, res) => {
 });
 
 app.post("/cadastro", (req, res) => {
-  const { nome, endereco } = req.body;
-  if (!nome || !endereco) {
-    res.status(400).send("Nome e endereço são campos obrigatórios.");
+  const { nome, endereco, email, Telefone } = req.body;
+  if (!nome || !endereco || !Email || !Telefone) {
+    res.status(400).send("Nome,endereço, Email, e Telefone são campos obrigatórios.");
     return;
   }
 
-  const cliente = { nome, endereco };
+  const cliente = { nome, endereco, email, Telefone };
   connection.query("INSERT INTO clientes SET ?", cliente, (err, result) => {
     if (err) throw err;
     console.log(`Cliente ${nome} cadastrado com sucesso!`);
@@ -55,6 +55,8 @@ app.get('/listagem', (req, res) => {
             <tr>
               <th>Nome</th>
               <th>endereco</th>
+              <th>email</th>
+              <th>Telefone</th>
             </tr>
     `;
     
@@ -63,6 +65,8 @@ app.get('/listagem', (req, res) => {
         <tr>
           <td>${cliente.nome}</td>
           <td>${cliente.endereco}</td>
+          <td>${cliente.email}</td>
+          <td>${cliente.Telefone}</td>
         </tr>
       `;
     });
@@ -119,8 +123,12 @@ app.post('/consulta', (req, res) => {
           <h1>Clientes encontrados</h1>
           <table>
             <tr>
+            
               <th>Nome</th>
               <th>endereco</th>
+              <th>email</th>
+              <th>Telefone</th>
+
             </tr>
     `;
     
@@ -129,6 +137,8 @@ app.post('/consulta', (req, res) => {
         <tr>
           <td>${cliente.nome}</td>
           <td>${cliente.endereco}</td>
+          <td>${cliente.email}</td)
+          <td>$${cliente.Telefone}</td>
         </tr>
       `;
     });
