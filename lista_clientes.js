@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   password: '',
-  database: 'meubanco2'
+  database: 'meubanco'
 });
 
 // Conexão com o banco de dados
@@ -36,9 +36,9 @@ app.post('/clientes', (req, res) => {
           <table>
             <tr>
               <th>Nome</th>
-              <th>endereco</th>
+              <th>endereço</th>
               <th>email</th>
-              <th>Telefone</th>
+              <th>telefone</th>
             </tr>
     `;
     
@@ -48,7 +48,7 @@ app.post('/clientes', (req, res) => {
           <td>${cliente.nome}</td>
           <td>${cliente.endereco}</td>
           <td>${cliente.email}</td>
-          <td>${cliente.Telefone}</td>
+          <td>${cliente.telefone}</td>
         </tr>
       `;
     });

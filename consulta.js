@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   password: '',
-  database: 'meubanco2'
+  database: 'meubanco'
 });
 
 // Conexão com o banco de dados
@@ -32,12 +32,10 @@ app.get('/consulta', (req, res) => {
           <input type="text" id="nome" name="nome"><br><br>
           <label for="endereco">Endereço:</label>
           <input type="text" id="endereco" name="endereco"><br><br>
-          <label for="email">email:</label>
+          <label for="email">email</label>
           <input type="text" id="email" name="email"><br><br>
-
-          <label for="Telefone">Numero de Telefone:</label>
-          <input type="number" id="Telefone" name="Telefone"><br><br>
-
+          <label for="telefone">telefone</label>
+          <input type="number" id="telefone" name="telefone"><br><br>
           <button type="submit">Consultar</button>
         </form>
       </body>
@@ -48,7 +46,7 @@ app.get('/consulta', (req, res) => {
 // Rota para processar a consulta
 app.post('/clientes', (req, res) => {
   //const nome = req.body.nome;
-  const { nome, endereco } = req.body;
+  const { nome, endereco, email, telefone } = req.body;
   //const endereco = req.body.endereco;
   
   // Consulta no banco de dados
@@ -67,9 +65,9 @@ app.post('/clientes', (req, res) => {
           <table>
             <tr>
               <th>Nome</th>
-              <th>endereco</th>
+              <th>endereço</th>
               <th>email</th>
-              <th>Telefone</th>
+              <th>telefone</th>
             </tr>
     `;
     
@@ -78,9 +76,8 @@ app.post('/clientes', (req, res) => {
         <tr>
           <td>${cliente.nome}</td>
           <td>${cliente.endereco}</td>
-
           <td>${cliente.email}</td>
-          <td>${cliente.Telefone}</td>
+          <td>${cliente.telefone}</td>
         </tr>
       `;
     });
